@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Title — Levels</title>
+<!--
+  LEVELS DESIGN SYSTEM · Print / PDF report template
+  A paginated US-Letter document. Reads fine on screen; designed to become a PDF.
+  All styling lives in levels-report.css (keep it beside this file).
+
+  TO MAKE THE PDF:
+    Browser  → open this file, ⌘P / Ctrl-P → Destination "Save as PDF",
+               Paper "Letter", Margins "Default", **Background graphics ON**.
+    Headless → chrome --headless --print-to-pdf=report.pdf --no-pdf-header-footer report-template.html
+               (headless print-to-pdf renders background graphics by default)
+  The @page rules in the CSS handle Letter portrait, a full-bleed cover page,
+  and page breaks per <section>.
+-->
+<link rel="stylesheet" href="levels-report.css">
+</head>
+<body>
+
+<!-- ============================ COVER (full-bleed dark page) ============================ -->
+<section class="cover">
+  <div class="eyebrow">Levels · Report Kicker · Internal</div>
+  <h1>Report Title Goes Here</h1>
+  <div class="rule"></div>
+  <p class="lead">One or two sentences framing what this document argues and for whom.</p>
+  <div class="meta">
+    <span><b>Prepared by</b><br>Levels / PLC</span>
+    <span><b>Status</b><br>Draft</span>
+    <span><b>Date</b><br>Month 2026</span>
+    <span><b>Audience</b><br>Leadership</span>
+  </div>
+</section>
+
+<div class="report">
+
+  <!-- ============================ EXECUTIVE SUMMARY ============================ -->
+  <!-- .no-break-before lets the summary follow the cover without forcing a blank page -->
+  <section class="section no-break-before">
+    <div class="eyebrow">Executive summary</div>
+    <h2>The one-line thesis, stated as a headline</h2>
+    <div class="prose">
+      <p>Opening paragraph. Body copy runs at a comfortable measure with generous line-height. Use <strong>bold</strong> for the numbers and terms that matter, and <em>italic</em> sparingly.</p>
+      <p>A second paragraph develops the argument. Each <code>&lt;section&gt;</code> starts a new printed page (except <code>.no-break-before</code>), so keep one idea per section.</p>
+    </div>
+    <div class="callout">
+      <div class="label">Thesis</div>
+      <p>The single sentence a reader should remember. Callouts sit on a sage fill.</p>
+    </div>
+    <div class="herostats">
+      <div class="herogroup">
+        <div class="herogroup-label">External benchmark</div>
+        <div class="herorow">
+          <div class="metric"><span class="big">15–35%</span><span class="unit">Headline range, source-flagged</span></div>
+          <div class="metric"><span class="big">20–30%</span><span class="unit">Secondary metric</span></div>
+        </div>
+      </div>
+      <div class="herogroup">
+        <div class="herogroup-label ours">Our data · IRB cohort</div>
+        <div class="herorow">
+          <div class="metric"><span class="big">51%</span><span class="unit">Owned-data metric · n=1,865</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Provenance in mono — flag which figures are benchmarks vs. owned data, and note anything directional.</p>
+    <div class="docfoot"><span>Report Title · Levels</span><span>Draft · Internal · Month 2026</span></div>
+  </section>
+
+  <!-- ============================ A CONTENT SECTION ============================ -->
+  <section class="section">
+    <div class="eyebrow">01 · Section name</div>
+    <h2>Section headline</h2>
+
+    <h3>A sub-heading</h3>
+    <div class="prose">
+      <p>Prose under a sub-heading. Headings avoid breaking away from the text that follows them (<code>break-after:avoid</code>), and cards/tables/callouts avoid splitting across pages.</p>
+    </div>
+
+    <h3>Another sub-heading</h3>
+    <div class="prose">
+      <p>More detail.</p>
+    </div>
+
+    <div class="offtable">
+      <span class="tag">⛔ Off the table</span>
+      <span>The ruled-out option and why it's excluded — rendered in the danger style, not amber.</span>
+    </div>
+
+    <div class="docfoot"><span>Report Title · Levels</span><span>Draft · Internal · Month 2026</span></div>
+  </section>
+
+  <!-- ============================ A DATA SECTION ============================ -->
+  <section class="section">
+    <div class="eyebrow">02 · Detail</div>
+    <h2>Tables and terms</h2>
+    <table>
+      <thead><tr><th>Option</th><th>Mechanism</th><th>Comp model</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>Displace incumbent</td><td>Per-transition fee</td></tr>
+        <tr><td>B</td><td>Run parallel</td><td>FMV clinical</td></tr>
+      </tbody>
+    </table>
+    <div class="gloss">
+      <div><b>Term one</b> — plain-language definition.</div>
+      <div><b>Term two</b> — plain-language definition.</div>
+    </div>
+    <div class="docfoot"><span>Report Title · Levels</span><span>Draft · Internal · Month 2026</span></div>
+  </section>
+
+</div>
+</body>
+</html>

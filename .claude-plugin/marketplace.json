@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "plc",
+  "version": "0.1.0",
+  "description": "Precision Longevity / Levels plugins — brand, design, and content tooling (no infrastructure or sensitive content).",
+  "owner": {
+    "name": "Precision Longevity Consultants"
+  },
+  "plugins": [
+    {
+      "name": "levels-brand",
+      "description": "Levels design system — on-brand HTML slide decks, print/PDF reports, and web doc-sites (tokens, components, templates, PDF workflow).",
+      "source": "./plugins/levels-brand",
+      "category": "design"
+    }
+  ]
+}

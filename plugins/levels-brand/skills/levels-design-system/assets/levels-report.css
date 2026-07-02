@@ -1,0 +1,335 @@
+/* ============================================================================
+   Levels brand stylesheet — reports & long-form documents
+   ----------------------------------------------------------------------------
+   Reverse-engineered from levels.com production CSS (June 2026) and adapted for
+   dense, print/PDF-ready executive documents. Companion to the slide-deck system.
+
+   Palette, type, and motifs are the canonical Levels brand tokens — reuse this
+   file for any Levels-branded document. The free fonts (Fraunces / Hanken
+   Grotesk / Geist Mono) are ~90% matches for the licensed faces (GT Sectra Fine
+   / TT Hoves / their mono); swap to the real faces if a doc goes external.
+
+   Print: US Letter, paginated, with a repeating footer. Print to PDF from
+   Chrome (background graphics ON) for a faithful render.
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+
+:root{
+  /* ---- palette (Levels source-of-truth tokens) ---- */
+  --bg:#fcfcf8;          /* warm off-white page — never pure #fff */
+  --bg-sage:#e6eeeb;     /* alt section / callout fill */
+  --bg-mint:#edf5f2;     /* lighter wash */
+  --bg-dark:#131413;     /* full-bleed dark sections */
+  --green:#1d7d6c;       /* primary — anchor, key numbers, labels */
+  --green-deep:#176456;  /* on dark, hover, pressed */
+  --ink:#131413;         /* primary text */
+  --ink-2:#585a59;       /* secondary text */
+  --ink-3:#8a908d;       /* captions, footnotes */
+  --hair:#c9d0ce;        /* rules, table lines */
+  --hair-soft:#e1e5e2;   /* softer dividers, card borders */
+  --lime:#cdff00;        /* signature accent — one idea per spread, max */
+  --amber:#be8d35;       /* caution / "off the table" markers */
+  --amber-bg:#fff7e8;
+  --amber-bd:#e8d9a8;
+  --danger:#9a2b2b;
+  --danger-bg:#fbeeee;
+  --danger-bd:#f0caca;
+
+  /* ---- type ---- */
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;      /* display headlines */
+  --sans:"Hanken Grotesk","Inter",system-ui,sans-serif;    /* body, UI */
+  --mono:"Geist Mono",ui-monospace,"IBM Plex Mono",monospace; /* eyebrows, units, data */
+
+  /* ---- document metrics ---- */
+  --measure:64rem;       /* max content width on screen */
+  --gap:1.4rem;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{font-size:16px}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-weight:400; line-height:1.5;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+
+/* ============================================================================
+   Document shell
+   ============================================================================ */
+.report{max-width:var(--measure); margin:0 auto; padding:clamp(1.6rem,4vw,3.4rem) clamp(1.4rem,5vw,4rem) 4rem}
+
+/* A "section" is a major chapter; it starts a new printed page. */
+.section{padding-top:2.4rem}
+.section + .section{margin-top:3.2rem}
+
+/* ============================================================================
+   Type primitives
+   ============================================================================ */
+.eyebrow{
+  font-family:var(--mono); font-size:.72rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--green);
+  display:flex; align-items:center; gap:.6em; margin-bottom:1rem;
+}
+.eyebrow::before{content:""; width:1.6em; height:2px; background:currentColor; display:inline-block}
+.eyebrow.plain::before{display:none}
+
+h1{font-family:var(--serif); font-weight:500; line-height:1.02; letter-spacing:-.015em}
+h2{font-family:var(--serif); font-weight:500; line-height:1.08; letter-spacing:-.012em;
+   font-size:clamp(1.7rem,3.4vw,2.5rem); color:var(--ink); margin-bottom:.8rem}
+h3{font-family:var(--serif); font-weight:600; line-height:1.15; letter-spacing:-.008em;
+   font-size:clamp(1.2rem,2vw,1.5rem); color:var(--ink); margin:1.8rem 0 .55rem}
+h4{font-family:var(--sans); font-weight:600; font-size:1.02rem; color:var(--ink);
+   margin:1.3rem 0 .4rem; letter-spacing:.005em}
+
+p{color:var(--ink); margin:0 0 .85rem; max-width:74ch}
+.prose p{font-size:1rem; line-height:1.62}
+.prose p:last-child{margin-bottom:0}
+
+.lead{font-family:var(--sans); font-size:clamp(1.05rem,1.5vw,1.24rem); line-height:1.5;
+  color:var(--ink-2); font-weight:400; max-width:58ch; margin-bottom:1rem}
+
+a{color:var(--green-deep); text-decoration:none; border-bottom:1px solid var(--hair)}
+a:hover{border-color:var(--green)}
+
+strong,b{font-weight:600; color:var(--ink)}
+em{font-style:italic}
+
+/* lists in prose */
+.prose ul,.prose ol{margin:0 0 1rem; padding-left:1.25rem; max-width:74ch}
+.prose li{font-size:1rem; line-height:1.55; margin-bottom:.4rem; padding-left:.2rem}
+.prose li::marker{color:var(--green)}
+.prose ul ul{margin:.4rem 0 .5rem}
+
+.kicker{font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--green); font-weight:500}
+
+/* ============================================================================
+   Cover
+   ============================================================================ */
+.cover{
+  background:var(--bg-dark); color:var(--bg);
+  min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(2.6rem,7vw,6rem);
+  margin:0 0 0; position:relative;
+}
+.cover .eyebrow{color:var(--lime)}
+.cover h1{font-size:clamp(2.8rem,8vw,6.4rem); color:#fff; max-width:18ch}
+.cover .rule{width:clamp(3rem,7vw,6rem); height:4px; background:var(--lime); margin:2rem 0 1.8rem}
+.cover .lead{color:#c9d0ce; max-width:50ch; font-size:clamp(1.05rem,1.7vw,1.4rem)}
+.cover .meta{
+  margin-top:auto; padding-top:3rem;
+  font-family:var(--mono); font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3);
+  display:flex; gap:2.4rem; flex-wrap:wrap;
+}
+.cover .meta b{color:#9fc5bc; font-weight:500}
+
+/* ============================================================================
+   Data hero — the Levels "big number" move
+   ============================================================================ */
+.metric{display:flex; flex-direction:column; gap:.15rem; margin:.4rem 0}
+.metric .big{font-family:var(--serif); font-weight:600; color:var(--green);
+  font-size:clamp(2.6rem,6vw,4.4rem); line-height:.92; letter-spacing:-.02em}
+.metric .unit{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink-2)}
+
+.statband{display:grid; grid-template-columns:repeat(auto-fit,minmax(8rem,1fr)); gap:1.2rem;
+  margin:1.4rem 0; padding:1.2rem 0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)}
+.statband .metric .big{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+
+/* two-group hero stats — cost benchmarks vs Levels' own data, kept visually separate */
+.herostats{margin:1.4rem 0; padding:1.2rem 0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  display:flex; flex-direction:column; gap:1.15rem}
+.herogroup{display:flex; flex-direction:column; gap:.55rem}
+.herogroup-label{font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:500}
+.herogroup-label.ours{color:var(--green-deep)}
+.herorow{display:grid; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr)); gap:1.4rem}
+.herostats .metric .big{font-size:clamp(1.7rem,3.2vw,2.5rem)}
+
+/* ============================================================================
+   Cards & grids
+   ============================================================================ */
+.grid{display:grid; gap:var(--gap); margin:1.4rem 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  background:#fff; border:1px solid var(--hair-soft); border-radius:16px;
+  padding:1.2rem 1.25rem; display:flex; flex-direction:column; gap:.45rem;
+}
+.card .num{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--green); font-weight:500}
+.card h3{font-family:var(--serif); font-weight:600; font-size:1.16rem; line-height:1.12; margin:0}
+.card p{font-size:.92rem; color:var(--ink-2); line-height:1.45; margin:0; max-width:none}
+.card.accent{border-color:var(--green); box-shadow:inset 0 0 0 1px var(--green)}
+.card.dark{background:#1d211f; border-color:#2d3130; color:#fff}
+.card.dark .num{color:var(--lime)}
+.card.dark h3{color:#fff}
+.card.dark p{color:#9fc5bc}
+
+/* labeled rows — for paired label/body content */
+.rows{display:flex; flex-direction:column; gap:.7rem; margin:1.2rem 0}
+.row{display:grid; grid-template-columns:7.5rem 1fr; gap:1.1rem; align-items:baseline;
+  padding-bottom:.75rem; border-bottom:1px solid var(--hair-soft)}
+.row:last-child{border-bottom:0; padding-bottom:0}
+.row .lab{font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--green); white-space:nowrap; padding-top:.2em}
+.row .body{font-size:.98rem; line-height:1.5; color:var(--ink)}
+.row .body .muted{color:var(--ink-2)}
+
+/* ============================================================================
+   Chips, callouts, notes
+   ============================================================================ */
+.chip{display:inline-flex; align-items:center; gap:.4em; font-family:var(--mono);
+  font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; font-weight:500;
+  padding:.38em .75em; border-radius:999px}
+.chip.green{background:var(--bg-mint); color:var(--green-deep)}
+.chip.lime{background:var(--lime); color:var(--ink)}
+.chip.amber{background:var(--amber-bg); color:#7a5d1a; border:1px solid var(--amber-bd)}
+.chip.danger{background:#2d1313; color:#ff9b9b}
+
+/* "Off the table" / banned bar */
+.offtable{display:flex; align-items:flex-start; gap:.8rem;
+  background:var(--danger-bg); border:1px solid var(--danger-bd); border-radius:12px;
+  padding:.85rem 1.1rem; margin:1.2rem 0; font-size:.94rem; color:var(--danger); line-height:1.45}
+.offtable .tag{font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase;
+  font-weight:600; white-space:nowrap; padding-top:.12em}
+.offtable b{color:var(--danger); font-weight:700}
+
+/* caution (amber) callout */
+.caution{display:flex; align-items:flex-start; gap:.8rem;
+  background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px;
+  padding:.85rem 1.1rem; margin:1.2rem 0; font-size:.94rem; color:#7a5d1a; line-height:1.45}
+
+/* pull / key-insight callout (sage) */
+.callout{background:var(--bg-sage); border-radius:16px; padding:1.4rem 1.6rem; margin:1.4rem 0}
+.callout p{margin:0; max-width:none}
+.callout .label{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--green-deep); font-weight:500; margin-bottom:.5rem}
+
+/* source / footnote line */
+.note{font-family:var(--mono); font-size:.72rem; letter-spacing:.02em; color:var(--ink-3);
+  line-height:1.6; margin:1rem 0; max-width:78ch}
+.note b{color:var(--ink-2); font-weight:500}
+
+/* data exhibit — internal-evidence figure rendered in the report's own language */
+.exhibit{background:var(--bg-sage); border-radius:16px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+.exhibit-label{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--green-deep); font-weight:500; margin-bottom:.4rem}
+.exhibit-title{font-family:var(--serif); font-weight:600; font-size:1.22rem; line-height:1.12;
+  letter-spacing:-.008em; color:var(--ink); margin:0 0 1rem}
+.exhibit-body{display:flex; gap:2.2rem; align-items:flex-start; flex-wrap:wrap}
+.exhibit-body .metric .big{font-size:clamp(2.4rem,5vw,3.4rem)}
+.exhibit-caveat{font-family:var(--mono); font-size:.68rem; letter-spacing:.04em; color:var(--ink-3);
+  margin-top:1.1rem; padding-top:.7rem; border-top:1px solid var(--hair)}
+.exhibit table{margin:.5rem 0 0; font-size:.92rem}
+.exhibit thead th{border-bottom-color:var(--green-deep)}
+.exhibit tbody td{border-bottom-color:var(--hair)}
+.exhibit tbody td:not(:first-child){font-family:var(--mono); color:var(--ink)}
+@media(max-width:820px){.exhibit-body{gap:1.2rem}}
+
+/* section divider rule */
+hr,.rule{border:0; border-top:1px solid var(--hair); margin:2.2rem 0}
+
+/* ============================================================================
+   Engagement ladder
+   ============================================================================ */
+.ladder{display:flex; flex-direction:column; gap:.6rem; margin:1.4rem 0}
+.rung{display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem; align-items:center;
+  background:#fff; border:1px solid var(--hair-soft); border-radius:14px; padding:1rem 1.25rem}
+.rung .rn{font-family:var(--mono); font-size:.82rem; color:var(--green); font-weight:500;
+  width:2.4em; height:2.4em; border:1.5px solid var(--green); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0}
+.rung .mid h3{font-family:var(--serif); font-weight:600; font-size:1.15rem; line-height:1.1; margin:0}
+.rung .mid p{font-size:.9rem; color:var(--ink-2); line-height:1.4; margin:.2rem 0 0; max-width:none}
+.rung .unlock{font-family:var(--mono); font-size:.66rem; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--green-deep); text-align:right; max-width:16ch; line-height:1.5}
+.rung.future{opacity:.62; border-style:dashed}
+.rung.future .rn{border-color:var(--ink-3); color:var(--ink-3)}
+.gate{display:flex; align-items:center; gap:.8rem; margin:.2rem 0; padding:0 .5rem}
+.gate .line{flex:1; height:0; border-top:2px dashed var(--green)}
+.gate .txt{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--green); white-space:nowrap; font-weight:500}
+
+/* ============================================================================
+   Tables — data as hero
+   ============================================================================ */
+table{width:100%; border-collapse:collapse; margin:1.3rem 0; font-size:.9rem}
+thead th{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--green); text-align:left; padding:.6rem .8rem; border-bottom:1.5px solid var(--green)}
+tbody td{padding:.65rem .8rem; border-bottom:1px solid var(--hair-soft); vertical-align:top;
+  line-height:1.4; color:var(--ink-2)}
+tbody td:first-child{font-weight:600; color:var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+table.tight td{font-size:.82rem; padding:.5rem .7rem}
+
+/* two-column glossary */
+.gloss{columns:2; column-gap:2.6rem; margin:1.2rem 0; font-size:.92rem}
+.gloss div{break-inside:avoid; margin-bottom:.8rem; line-height:1.45}
+.gloss b{font-family:var(--mono); font-size:.78em; letter-spacing:.03em; color:var(--green-deep); text-transform:uppercase}
+
+/* ============================================================================
+   Running footer (repeats on each printed page in Chrome)
+   ============================================================================ */
+.docfoot{display:none}
+
+/* ============================================================================
+   Responsive (screen)
+   ============================================================================ */
+@media(max-width:820px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .gloss{columns:1}
+  .row{grid-template-columns:1fr; gap:.25rem}
+  .rung{grid-template-columns:auto 1fr; gap:.9rem}
+  .rung .unlock{grid-column:2; text-align:left; max-width:none}
+}
+
+/* ============================================================================
+   Print / PDF — US Letter, paginated
+   ============================================================================ */
+@page{
+  size:letter portrait;
+  margin:0.7in 0.75in 1in;   /* extra bottom margin reserves a band for the running footer */
+}
+@page cover{          /* full-bleed cover — no margins so the dark field reaches the paper edge */
+  size:letter portrait;
+  margin:0;
+}
+@media print{
+  html{font-size:11.5px}
+  body{background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  .report{max-width:none; margin:0; padding:0}
+
+  /* cover is full-bleed on its own zero-margin page, filling the whole sheet */
+  .cover{
+    page:cover; margin:0; height:11in; min-height:11in;
+    padding:1in 0.85in;
+    page-break-after:always; break-after:page;
+    print-color-adjust:exact; -webkit-print-color-adjust:exact;
+  }
+  .section{page-break-before:always; break-before:page; padding-top:0}
+  .section.no-break-before{page-break-before:auto; break-before:auto}
+
+  /* keep structures intact across page boundaries */
+  h2,h3,h4{break-after:avoid}
+  .card,.rung,.gate,.callout,.offtable,.caution,.metric,.statband,.herostats,.herogroup,.gloss div,
+  .exhibit,figure,tr,.row{break-inside:avoid}
+  table{break-inside:auto}
+  thead{display:table-header-group}     /* repeat header on each page */
+
+  a{color:var(--ink); border-bottom:0}
+
+  /* compact the engagement ladder + its recommendation callout so both fit one page */
+  .ladder{gap:.4rem; margin:1.1rem 0}
+  .rung{padding:.62rem 1.1rem}
+  .rung .mid p{margin-top:.1rem; line-height:1.3}
+  .callout .rows{gap:.4rem}
+  .callout .row{padding-bottom:.4rem}
+
+  /* The per-section .docfoot blocks stay hidden in print: Chrome's print engine
+     can't anchor a repeating fixed footer to the page-margin band without colliding
+     with flowing text. Page numbers come from the browser print dialog (rendered
+     natively in the margin) or `--print-to-pdf` with header/footer enabled. */
+  .docfoot{display:none}
+  .prose li,.prose p{orphans:2; widows:2}
+}

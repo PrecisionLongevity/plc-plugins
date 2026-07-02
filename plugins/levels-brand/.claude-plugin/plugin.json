@@ -1,0 +1,8 @@
+{
+  "name": "levels-brand",
+  "version": "0.1.0",
+  "description": "Levels design system: color tokens, typography, a component library, and runnable HTML templates for slide decks, print/PDF reports, and web doc-sites — plus a print-to-PDF workflow. Reverse-engineered from levels.com.",
+  "author": {
+    "name": "Precision Longevity Consultants"
+  }
+}

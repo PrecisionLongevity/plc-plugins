@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doc Title — Levels</title>
+<!--
+  LEVELS DESIGN SYSTEM · Long-form doc / spec-site template
+  Copy this file, rename it, replace the sample sections.
+  Sidebar TOC auto-highlights the section in view (scrollspy). Nav groups collapse.
+  Keep the :root tokens and component CSS intact — replace only content.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcf8; --bg-sage:#e6eeeb; --bg-mint:#edf5f2; --bg-dark:#131413;
+  --green:#1d7d6c; --green-deep:#176456; --ink:#131413; --ink-2:#585a59; --ink-3:#8a908d;
+  --hair:#c9d0ce; --hair-soft:#e1e5e2; --lime:#cdff00; --amber:#be8d35;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk","Inter",system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,monospace;
+  --topbar:56px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+[id]{scroll-margin-top:calc(var(--topbar) + 12px)}
+
+/* ---------- TOP BAR ---------- */
+.topbar{position:sticky;top:0;z-index:60;height:var(--topbar);display:flex;align-items:center;gap:18px;padding:0 20px;
+  background:rgba(252,252,248,0.86);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--hair-soft)}
+.tb-title{font-family:var(--serif);font-weight:600;font-size:16px;white-space:nowrap}
+.tb-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.tb-spacer{flex:1 1 auto}
+.tb-stat{font-family:var(--mono);font-size:12px;letter-spacing:.06em;white-space:nowrap}
+.tb-stat .dec{color:var(--green);font-weight:500}
+.tb-stat .opn{color:var(--amber);font-weight:500}
+.tb-stat .dot{color:var(--ink-3);margin:0 8px}
+.hamburger{display:none;background:none;border:1px solid var(--hair);border-radius:7px;width:38px;height:34px;cursor:pointer;
+  align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.hamburger span{display:block;width:17px;height:1.6px;background:var(--ink)}
+
+/* ---------- LAYOUT ---------- */
+.shell{display:grid;grid-template-columns:264px minmax(0,1fr);align-items:start}
+@media (max-width:1099px){.shell{grid-template-columns:1fr}}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{position:sticky;top:var(--topbar);height:calc(100vh - var(--topbar));overflow-y:auto;border-right:1px solid var(--hair-soft);padding:22px 14px 60px 22px}
+@media (max-width:1099px){.sidebar{display:none;position:fixed;top:var(--topbar);left:0;width:280px;background:var(--bg);z-index:55}.sidebar.open{display:block}}
+.nav-group{margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid var(--hair-soft)}
+.nav-group:last-child{border-bottom:none}
+.nav-top{display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:9px 6px;color:var(--ink);font-family:var(--sans);font-weight:500;font-size:14.5px;line-height:1.25;border-radius:6px}
+.nav-top:hover{background:var(--bg-mint)}
+.nav-top .idx{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em;flex:0 0 auto;width:16px}
+.nav-top.active-parent{color:var(--green-deep);font-weight:600}
+.nav-top .caret{margin-left:auto;font-size:10px;color:var(--ink-3);transition:transform .18s}
+.nav-group.collapsed .caret{transform:rotate(-90deg)}
+.nav-subs{list-style:none;margin:0 0 8px 0;padding:0 0 0 25px;overflow:hidden}
+.nav-group.collapsed .nav-subs{display:none}
+.nav-sub a{display:block;text-decoration:none;color:var(--ink-2);font-size:13px;line-height:1.3;padding:5px 8px 5px 10px;border-left:2px solid transparent;border-radius:0 5px 5px 0}
+.nav-sub a:hover{color:var(--ink);background:var(--bg-mint)}
+.nav-sub a.active{color:var(--green-deep);font-weight:600;border-left:2px solid var(--lime);background:var(--bg-mint)}
+
+/* ---------- CONTENT ---------- */
+.content{padding:14px 56px 140px 56px;min-width:0}
+@media (max-width:640px){.content{padding:14px 22px 100px}}
+.measure{max-width:720px}
+.content section{scroll-margin-top:calc(var(--topbar) + 12px)}
+.content h2{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.12;letter-spacing:-.4px;margin:80px 0 8px;max-width:720px}
+.content section:first-child h2{margin-top:28px}
+.content h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.2;margin:46px 0 6px;max-width:720px}
+.content h4{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.02em;margin:26px 0 6px;color:var(--ink);max-width:720px}
+.content p{max-width:720px;margin:13px 0}
+.content ul,.content ol{max-width:720px;padding-left:22px}
+.content li{margin:7px 0}
+.content a{color:var(--green-deep)}
+.content code{font-family:var(--mono);font-size:.86em;background:var(--bg-mint);padding:1px 5px;border-radius:4px}
+.content strong{font-weight:600}
+.content em{color:var(--ink-2)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin:80px 0 0;max-width:720px}
+.content section:first-child .eyebrow{margin-top:18px}
+.content > section > .eyebrow + h2{margin-top:6px}
+hr.sec-rule{border:none;border-top:1px solid var(--hair);max-width:720px;margin:64px 0 0}
+
+/* tables in prose */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.content table{border-collapse:collapse;width:100%;max-width:840px;margin:18px 0;font-size:14.5px}
+.content thead th{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-2);text-align:left;padding:8px 12px;border-bottom:1px solid var(--hair);vertical-align:bottom}
+.content tbody td{padding:10px 12px;border-bottom:1px solid var(--hair-soft);vertical-align:top;line-height:1.45}
+.content pre{font-family:var(--mono);font-size:12px;line-height:1.5;background:var(--bg-mint);border:1px solid var(--hair-soft);border-radius:9px;padding:16px 18px;overflow-x:auto;max-width:760px;color:var(--ink-2)}
+
+/* callouts, chips, pills */
+.deal-note{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-2);background:var(--bg-sage);border-radius:7px;padding:9px 13px;margin:12px 0;max-width:760px;display:inline-block}
+.pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:20px;background:var(--lime);color:var(--ink);font-weight:500}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:4px 9px;border-radius:6px;border:1px solid var(--hair);display:inline-block;color:var(--ink-2)}
+.chip.on{background:var(--bg-sage);color:var(--green-deep);border-color:transparent}
+.chip.off{color:var(--ink-3)}
+
+/* care-stack bands */
+.cs-diagram{margin:18px 0 8px;max-width:760px}
+.cs-band{border-radius:11px;padding:16px 20px;margin:0 auto;background:var(--bg-mint);border:1px solid var(--hair-soft);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.cs-band .cs-name{font-weight:600;font-size:15px}
+.cs-band .cs-owner{font-size:12.5px;color:var(--ink-2)}
+.cs-band-1{width:100%}.cs-band-2{width:78%}.cs-band-3{width:54%}
+@media (max-width:760px){.cs-band-1,.cs-band-2,.cs-band-3{width:100%}}
+.cs-arrow{text-align:center;color:var(--ink-3);font-size:12px;font-family:var(--mono);letter-spacing:.04em;padding:9px 0;line-height:1.4}
+.cs-arrow .glyph{display:block;font-size:14px;color:var(--green);margin-bottom:2px}
+.disposes{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;background:var(--lime);color:var(--ink);padding:8px 13px;border-radius:7px;display:inline-block;margin-top:14px;font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="tb-title">Doc Title</span>
+  <span class="tb-sub">Levels × PLC · Subtitle</span>
+  <span class="tb-spacer"></span>
+  <span class="tb-stat"><span class="dec">6 decided</span><span class="dot">·</span><span class="opn">2 open</span></span>
+  <button class="hamburger" id="hb" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-group">
+      <button class="nav-top"><span class="idx">01</span>Overview<span class="caret">▾</span></button>
+      <ul class="nav-subs">
+        <li class="nav-sub"><a href="#overview">Summary</a></li>
+        <li class="nav-sub"><a href="#context">Context</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <button class="nav-top"><span class="idx">02</span>Model<span class="caret">▾</span></button>
+      <ul class="nav-subs">
+        <li class="nav-sub"><a href="#model">Structure</a></li>
+        <li class="nav-sub"><a href="#stack">Care stack</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <button class="nav-top"><span class="idx">03</span>Detail<span class="caret">▾</span></button>
+      <ul class="nav-subs">
+        <li class="nav-sub"><a href="#table">Comparison</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="content">
+
+    <section id="overview">
+      <div class="eyebrow">Section 01</div>
+      <h2>Overview</h2>
+      <p class="measure">Lead paragraph. Prose caps at ~720px for readability. Use <strong>bold</strong> for emphasis and <code>mono</code> for inline terms. Editorial-serif headings, sans body, warm off-white page.</p>
+      <div class="deal-note">Key decision or assumption, called out in a mono note on a sage fill.</div>
+      <p><span class="pill">Decided</span> <span class="chip on">Included</span> <span class="chip off">Out of scope</span></p>
+      <hr class="sec-rule">
+    </section>
+
+    <section id="context">
+      <div class="eyebrow">Section 01 · b</div>
+      <h2>Context</h2>
+      <p class="measure">A second sub-section. The sidebar link highlights as this scrolls into view.</p>
+      <hr class="sec-rule">
+    </section>
+
+    <section id="model">
+      <div class="eyebrow">Section 02</div>
+      <h2>Model</h2>
+      <p class="measure">Body copy explaining the structure.</p>
+      <h3>A sub-heading in serif</h3>
+      <p class="measure">More detail.</p>
+      <hr class="sec-rule">
+    </section>
+
+    <section id="stack">
+      <div class="eyebrow">Section 02 · b</div>
+      <h2>Care stack</h2>
+      <p class="measure">Decreasing-width bands visualize a stack, funnel, or taper.</p>
+      <div class="cs-diagram">
+        <div class="cs-band cs-band-1"><span class="cs-name">Layer one</span><span class="cs-owner">Owner</span></div>
+        <div class="cs-arrow"><span class="glyph">↓</span> tapers into</div>
+        <div class="cs-band cs-band-2"><span class="cs-name">Layer two</span><span class="cs-owner">Owner</span></div>
+        <div class="cs-arrow"><span class="glyph">↓</span></div>
+        <div class="cs-band cs-band-3"><span class="cs-name">Layer three</span><span class="cs-owner">Owner</span></div>
+      </div>
+      <span class="disposes">Output / disposition highlighted in lime</span>
+      <hr class="sec-rule">
+    </section>
+
+    <section id="table">
+      <div class="eyebrow">Section 03</div>
+      <h2>Comparison</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Tier</th><th>Who</th><th>Cadence</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Core</td><td>All members</td><td>Monthly</td><td><span class="chip on">Live</span></td></tr>
+            <tr><td>Plus</td><td>Eligible</td><td>Biweekly</td><td><span class="chip off">Planned</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// collapse/expand nav groups
+document.querySelectorAll('.nav-top').forEach(btn=>{
+  btn.addEventListener('click',()=>btn.closest('.nav-group').classList.toggle('collapsed'));
+});
+// mobile sidebar toggle
+document.getElementById('hb').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+// scrollspy — highlight the section in view
+const links=[...document.querySelectorAll('.nav-sub a')];
+const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const spy=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.remove('active'));
+      const a=map.get(e.target.id);
+      if(a){a.classList.add('active');
+        document.querySelectorAll('.nav-top').forEach(n=>n.classList.remove('active-parent'));
+        const grp=a.closest('.nav-group'); if(grp) grp.querySelector('.nav-top').classList.add('active-parent');
+      }
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('.content section').forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>

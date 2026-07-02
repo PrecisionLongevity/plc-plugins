@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deck Title — Levels</title>
+<!--
+  LEVELS DESIGN SYSTEM · Slide deck template
+  Copy this file, rename it, and replace the sample slides below.
+  Keep the :root tokens, type primitives, and component CSS intact — replace only content.
+  Navigate: ← → arrows / click / space. F = fullscreen. Print → one slide per page (PDF).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcf8; --bg-sage:#e6eeeb; --bg-mint:#edf5f2; --bg-dark:#131413;
+  --green:#1d7d6c; --green-deep:#176456; --ink:#131413; --ink-2:#585a59;
+  --ink-3:#8a908d; --hair:#c9d0ce; --hair-soft:#e1e5e2; --lime:#cdff00; --amber:#be8d35;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Hanken Grotesk","Inter",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"IBM Plex Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* ---------- deck shell ---------- */
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(2.2rem,5.2vw,5.5rem);opacity:0;visibility:hidden;pointer-events:none;overflow-y:auto;transition:opacity .42s ease}
+.slide.active{opacity:1;visibility:visible;pointer-events:auto}
+.slide.dark{background:var(--bg-dark);color:var(--bg)}
+.slide.sage{background:var(--bg-sage)}
+
+/* ---------- type primitives ---------- */
+.eyebrow{font-family:var(--mono);font-size:clamp(.68rem,.95vw,.9rem);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--green);display:flex;align-items:center;gap:.6em;margin-bottom:1.4rem;font-weight:500}
+.dark .eyebrow{color:var(--lime)}
+.eyebrow::before{content:"";width:1.6em;height:2px;background:currentColor;display:inline-block}
+h1{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.015em}
+h2{font-family:var(--serif);font-weight:500;line-height:1.04;letter-spacing:-.014em;font-size:clamp(2.35rem,4.7vw,4.15rem)}
+.lead{font-size:clamp(1.1rem,1.65vw,1.45rem);color:var(--ink-2);line-height:1.45;max-width:48ch;font-weight:400}
+.dark .lead{color:#c9d0ce}
+.kicker{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- cover ---------- */
+.cover h1{font-size:clamp(3.6rem,9.8vw,8.8rem)}
+.cover .lead{margin-top:1.8rem;font-size:clamp(1.2rem,2vw,1.7rem);color:#c9d0ce}
+.cover-foot{position:absolute;left:clamp(2.2rem,5.2vw,5.5rem);bottom:clamp(2.2rem,5.2vw,5.5rem);
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:2rem;flex-wrap:wrap}
+.cover-rule{width:clamp(3rem,7vw,6rem);height:4px;background:var(--lime);margin-top:2.4rem}
+
+/* ---------- grids & cards ---------- */
+.grid{display:grid;gap:clamp(.8rem,1.4vw,1.4rem);margin-top:clamp(1.4rem,2.6vw,2.4rem)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fdfcf8;border:1px solid var(--hair-soft);border-radius:18px;
+  padding:clamp(1rem,1.6vw,1.6rem);display:flex;flex-direction:column;gap:.5rem}
+.sage .card{background:#fcfcf8}
+.card .num{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--green);font-weight:500}
+.card h3{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,1.55vw,1.32rem);line-height:1.1;letter-spacing:-.01em}
+.card p{font-size:clamp(.82rem,1.04vw,.96rem);color:var(--ink-2);line-height:1.4}
+.card.accent{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+
+/* big metric */
+.metric{display:flex;flex-direction:column;gap:.2rem}
+.metric .big{font-family:var(--serif);font-weight:600;color:var(--green);font-size:clamp(2.6rem,6vw,4.8rem);line-height:.92;letter-spacing:-.02em}
+.metric .unit{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+
+/* evidence exhibit */
+.exhibit{background:#fdfcf8;border:1px solid var(--hair-soft);border-radius:18px;padding:clamp(1.1rem,1.9vw,1.7rem);flex:1;min-width:18rem}
+.exhibit-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:500}
+.exhibit-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.1;letter-spacing:-.01em;margin:.35rem 0 0}
+.exhibit-body{display:flex;gap:clamp(1.2rem,2.6vw,2.6rem);align-items:center;margin-top:1.1rem;flex-wrap:wrap}
+.exhibit .metric .big{font-size:clamp(2.4rem,4.6vw,3.6rem)}
+.exhibit-caveat{font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;color:var(--ink-3);margin-top:.9rem}
+
+/* two-column split */
+.split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(1.6rem,3.4vw,3.6rem);align-items:center;margin-top:1rem}
+@media(max-width:900px){.split{grid-template-columns:1fr}.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+
+/* lists */
+.rows{display:flex;flex-direction:column;gap:.7rem;margin-top:1.4rem}
+.row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:baseline;padding-bottom:.7rem;border-bottom:1px solid var(--hair-soft)}
+.row .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-top:.15em}
+.row .body{font-size:clamp(.84rem,1.08vw,1rem);line-height:1.4;color:var(--ink)}
+.row .body b{font-weight:600}
+.row .body .muted{color:var(--ink-2)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:.45em;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:.4em .8em;border-radius:999px;font-weight:500}
+.chip.banned{background:#2d1313;color:#ff9b9b}
+.chip.green{background:var(--bg-mint);color:var(--green-deep)}
+.chip.lime{background:var(--lime);color:var(--ink)}
+.banned-bar{display:flex;align-items:center;gap:.7rem;background:#fbeeee;border:1px solid #f0caca;border-radius:12px;
+  padding:.75rem 1.1rem;margin-top:1.2rem;font-size:.9rem;color:#9a2b2b;line-height:1.35}
+.banned-bar b{font-weight:700}
+.note{font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;color:var(--ink-2);line-height:1.5;margin-top:1.2rem;max-width:74ch}
+
+/* engagement ladder */
+.ladder{display:flex;flex-direction:column-reverse;gap:.5rem;margin-top:.9rem}
+.rung{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;background:#fdfcf8;
+  border:1px solid var(--hair-soft);border-radius:14px;padding:.72rem 1.2rem}
+.rung .rn{font-family:var(--mono);font-size:.78rem;color:var(--green);font-weight:500;width:2.4em;height:2.4em;
+  border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.rung .mid h3{font-family:var(--serif);font-weight:600;font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.1}
+.rung .mid p{font-size:clamp(.76rem,.98vw,.9rem);color:var(--ink-2);line-height:1.35;margin-top:.15rem}
+.rung .unlock{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--green-deep);text-align:right;max-width:18ch;line-height:1.45}
+.rung.future{opacity:.6;border-style:dashed}
+.rung.future .rn{border-color:var(--ink-3);color:var(--ink-3)}
+.rung.r1{margin-right:0}.rung.r2{margin-right:3%}.rung.r3{margin-right:6%}.rung.r4{margin-right:9%}.rung.r5{margin-right:12%}
+.gate{display:flex;align-items:center;gap:.7rem;margin:.25rem 0;padding-left:1rem}
+.gate .line{flex:1;height:0;border-top:2px dashed var(--green)}
+.gate .txt{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);white-space:nowrap}
+
+/* tables (appendix) */
+table.matrix{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:clamp(.66rem,.92vw,.84rem)}
+table.matrix th{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);
+  text-align:left;padding:.5rem .7rem;border-bottom:1.5px solid var(--green)}
+table.matrix td{padding:.5rem .7rem;border-bottom:1px solid var(--hair-soft);vertical-align:top;line-height:1.3;color:var(--ink-2)}
+table.matrix td:first-child{font-weight:600;color:var(--ink);font-family:var(--sans);white-space:nowrap}
+.gloss{columns:2;column-gap:2.4rem;margin-top:1.2rem;font-size:clamp(.74rem,.98vw,.9rem)}
+.gloss div{break-inside:avoid;margin-bottom:.7rem;line-height:1.38}
+.gloss b{font-family:var(--mono);font-size:.78em;letter-spacing:.03em;color:var(--green-deep);text-transform:uppercase}
+@media(max-width:900px){.gloss{columns:1}}
+
+/* chrome */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--green);width:0;z-index:50;transition:width .42s ease}
+.counter{position:fixed;right:1.6rem;bottom:1.3rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--ink-3);z-index:50}
+.foot-id{position:absolute;left:clamp(2.2rem,5.2vw,5.5rem);bottom:1.3rem;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.dark .foot-id{color:#585a59}
+.hint{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%);font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--ink-3);opacity:.55;z-index:50}
+
+@media print{
+  body{overflow:visible}
+  .slide{position:relative;opacity:1!important;visibility:visible!important;page-break-after:always;height:100vh;width:100vw}
+  .progress,.counter,.hint{display:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · COVER (dark = chapter break) -->
+  <section class="slide dark cover active">
+    <div class="eyebrow">Levels · Deck Kicker · Internal</div>
+    <h1>Deck<br>Headline</h1>
+    <div class="cover-rule"></div>
+    <p class="lead">One-sentence framing of what this deck argues.</p>
+    <div class="cover-foot"><span>Levels / PLC</span><span>Draft</span><span>Month 2026</span></div>
+  </section>
+
+  <!-- 2 · CARD GRID -->
+  <section class="slide">
+    <div class="eyebrow">The situation</div>
+    <h2>One claim per slide,<br>stated as the title</h2>
+    <div class="grid g3">
+      <div class="card"><div class="num">FIRST</div><h3>Card title</h3><p>Supporting detail in secondary ink. Keep it tight.</p></div>
+      <div class="card"><div class="num">SECOND</div><h3>Card title</h3><p>Supporting detail. Data as the hero.</p></div>
+      <div class="card accent"><div class="num">THE POINT</div><h3>Emphasized card</h3><p>The one card to land on.</p><span class="chip green">Key</span></div>
+    </div>
+    <p class="note">Footnote / source flag in mono — e.g. large-employer benchmark.</p>
+    <div class="foot-id">Situation</div>
+  </section>
+
+  <!-- 3 · SAGE SPLIT + BANNED BAR -->
+  <section class="slide sage">
+    <div class="eyebrow">How it works</div>
+    <h2>Pair a definition list<br>with one accent card</h2>
+    <div class="split">
+      <div class="rows" style="margin-top:0">
+        <div class="row"><span class="lab">Us</span><span class="body"><b>What we do</b> — <span class="muted">the mechanism.</span></span></div>
+        <div class="row" style="border:none"><span class="lab">Them</span><span class="body"><span class="muted">The contrast we're deliberately not.</span></span></div>
+      </div>
+      <div class="card accent">
+        <div class="num">WHY THIS SHAPE</div>
+        <h3>The reasoning, in serif</h3>
+        <p>Why the structure holds up.</p>
+        <span class="chip green">Set in advance</span>
+      </div>
+    </div>
+    <div class="banned-bar"><span class="chip banned">⛔ Off the table</span><span><b>The ruled-out option.</b> Why it's excluded.</span></div>
+    <div class="foot-id">Model</div>
+  </section>
+
+  <!-- 4 · METRIC HERO + EXHIBIT -->
+  <section class="slide">
+    <div class="eyebrow">Evidence</div>
+    <h2>Lead with the number</h2>
+    <div class="split">
+      <div class="metric"><span class="big">~15–35%</span><span class="unit">headline result</span></div>
+      <div class="exhibit">
+        <div class="exhibit-label">Source · trial or benchmark</div>
+        <div class="exhibit-title">What the number means</div>
+        <div class="exhibit-body"><div class="metric"><span class="big">20%</span><span class="unit">secondary metric</span></div><p>One line of interpretation.</p></div>
+        <div class="exhibit-caveat">Caveat / provenance in mono.</div>
+      </div>
+    </div>
+    <div class="foot-id">Evidence</div>
+  </section>
+
+  <!-- 5 · LADDER (dark big-idea slide) -->
+  <section class="slide dark">
+    <div class="eyebrow">The path</div>
+    <h2 style="max-width:20ch">Staged progression, gated on data</h2>
+    <div class="ladder" style="margin-top:1.6rem">
+      <div class="rung r1"><span class="rn">1</span><div class="mid"><h3>Baseline</h3><p>Current state.</p></div><span class="unlock">Data ask</span></div>
+      <div class="gate"><span class="line"></span><span class="txt">Gate · data confirmed</span></div>
+      <div class="rung r2"><span class="rn">2</span><div class="mid"><h3>First move</h3><p>Near-term.</p></div><span class="unlock">~10% saved</span></div>
+      <div class="rung r3 future"><span class="rn">3</span><div class="mid"><h3>Full program</h3><p>Future state.</p></div><span class="unlock">TBD</span></div>
+    </div>
+  </section>
+
+  <!-- 6 · APPENDIX: MATRIX + GLOSSARY -->
+  <section class="slide sage">
+    <div class="eyebrow">Appendix</div>
+    <h2 style="font-size:clamp(1.7rem,3.3vw,2.7rem)">Options &amp; terms</h2>
+    <table class="matrix">
+      <thead><tr><th>Option</th><th>Mechanism</th><th>Comp model</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>Displace incumbent</td><td>Per-transition fee</td></tr>
+        <tr><td>B</td><td>Run parallel</td><td>FMV clinical</td></tr>
+      </tbody>
+    </table>
+    <div class="gloss">
+      <div><b>Term one</b> — plain-language definition.</div>
+      <div><b>Term two</b> — plain-language definition.</div>
+    </div>
+    <div class="foot-id">Appendix</div>
+  </section>
+
+</div>
+
+<div class="counter" id="counter">01 / 06</div>
+<div class="hint">← → to navigate · F fullscreen</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const progress=document.getElementById('progress');
+const counter=document.getElementById('counter');
+const total=slides.length;
+let i=0;
+function pad(n){return String(n).padStart(2,'0')}
+function show(n){
+  i=Math.max(0,Math.min(total-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  progress.style.width=((i+1)/total*100)+'%';
+  counter.textContent=pad(i+1)+' / '+pad(total);
+  const dark=slides[i].classList.contains('dark');
+  counter.style.color=dark?'#6a6f6d':'#8a908d';
+  progress.style.background=dark?'#cdff00':'#1d7d6c';
+  history.replaceState(null,'','#'+(i+1));
+}
+function next(){show(i+1)} function prev(){show(i-1)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev()}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(total-1);
+  else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(e.target.closest('a'))return;
+  (e.clientX>window.innerWidth*0.5)?next():prev();
+});
+const start=parseInt((location.hash||'').replace('#',''))||1;
+show(start-1);
+</script>
+</body>
+</html>
